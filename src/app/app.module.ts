@@ -6,11 +6,13 @@ import { AppComponent } from './app.component';
 import { ClarityModule } from '@clr/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProdutosComponent } from './produtos/produtos.component';
+import { DeleteProductModalComponent } from './delete-product-modal/delete-product-modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ProdutosComponent
+    ProdutosComponent,
+    DeleteProductModalComponent
   ],
   imports: [
     BrowserModule,

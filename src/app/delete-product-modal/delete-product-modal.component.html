@@ -1,0 +1,12 @@
+<clr-modal [clrModalOpen]="true">
+  <h3 class="modal-title">Deletar Produto</h3>
+  <div class="modal-body">
+    <p>Tem certeza de que deseja excluir o produto?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline"
+    (click)="cancelarDelete()">Cancelar</button>
+    <button type="button" class="btn btn-danger"
+    (click)="confirmarDelete()">Deletar</button>
+  </div>
+</clr-modal>
