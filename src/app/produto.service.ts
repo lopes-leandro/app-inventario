@@ -162,4 +162,14 @@ export class ProdutoService {
   ];
 
   produto$ = new BehaviorSubject<IProduto[]>(this.produtos);
+
+  removerProduto(produto) {
+
+    const index = this.produtos.indexOf(produto);
+    this.produtos = [
+      ...this.produtos.slice(0, index),
+      ...this.produtos.slice(index, 1),
+    ];
+    this.produto$.next(this.produtos);
+  }
 }
