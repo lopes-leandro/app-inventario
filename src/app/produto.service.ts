@@ -34,7 +34,7 @@ export class ProdutoService {
     {
       id: gerandoId(),
       nome: 'Cabo USB (2 Metros)',
-      ativo: true,
+      ativo: false,
       descricao: 'This is a 2 meter (6.5 feet) USB cable for use with a USB printer interface.',
       dataExpiracao: '1/15/2020',
       tipo: 'Connectivity'
@@ -42,7 +42,7 @@ export class ProdutoService {
     {
       id: gerandoId(),
       nome: 'Kit de servidor de impressão sem fio MarkNet N8352 802.11b/g/n',
-      ativo: true,
+      ativo: false,
       descricao: `O servidor de impressão MarkNet N8352 fornece recursos de impressão sem fio 802.11b/g/n para as,
       impressoras Lexmark usando um conector RP-SMA com antena. Usando a faixa de 2,4 GHz, esse servidor de
       impressão sem fio se conecta a qualquer rede sem fio para oferecer recursos de impressão em rede
