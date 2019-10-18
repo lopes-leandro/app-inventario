@@ -17,7 +17,7 @@ export class ProdutosComponent implements OnInit {
   trackById(index, item){
     return item.id;
   }
-  
+
   ngOnInit() {
   }
 
