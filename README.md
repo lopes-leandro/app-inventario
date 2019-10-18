@@ -1,6 +1,6 @@
 # Aplicativo de Inventário
 
-Versão do [Angular CLI]: 7.3.9.
+Versão do Angular CLI: 7.3.9.
 
 ## Servidor de Desenvolvimento
 
