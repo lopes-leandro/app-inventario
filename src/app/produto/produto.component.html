@@ -1,0 +1,57 @@
+<form [formGroup]="produtoForm">
+  <clr-wizard #produtoWizard [clrWizardOpen]="true" clr-WizardSize="lg" (clrWizardOnCancel)="handleClose()">
+    <clr-wizard-title>{{produto ? 'Editar Produto' : 'Adicionar Novo Produto'}}</clr-wizard-title>
+    <clr-wizard-button [type]="'cancel'" (click)="handleClose()">Cancelar</clr-wizard-button>
+    <clr-wizard-button [type]="'previous'">Voltar</clr-wizard-button>
+    <clr-wizard-button [type]="'next'">Próximo</clr-wizard-button>
+    <clr-wizard-button [type]="'finish'" (click)="handleClose()">Finalizar</clr-wizard-button>
+    <clr-wizard-page>
+      <ng-template clrPageTitle>Selecione o Tipo de Equipamento</ng-template>
+      <div class="clr-row devices">
+        <div class="clr-col-md-6" *ngFor="let item of dispositivoTipos">
+          <a href="javascript:void(0)" class="card clickable" (click)="selecionarDispositivo(item)"
+            [ngClass]="{'active': item.icon === dispositivoTipo}">
+            <div class="card-block">
+              <p class="card-text">
+                {{item.nome}}
+                <clr-icon [attr.shape]="item.icon"></clr-icon>
+              </p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </clr-wizard-page>
+    <clr-wizard-page>
+      <ng-template clrPageTitle>Informações Básicas</ng-template>
+      <div formGroupName="basic">
+        <!--Campo Input do Nome do Produto-->
+        <clr-input-container>
+          <label for="produto-nome">Nome do Produto *</label>
+          <input type="text" clrInput id="produto-nome" placeholder="IPhone X..." formControlName="nome">
+        </clr-input-container>
+        <!--Toggle Switch do ativo-->
+        <div class="toggle-switch">
+          <input type="checkbox" id="ativo" formControlName="ativo">
+          <label for="ativo">Ativo</label>
+        </div>
+        <!--TextArea para Descrição do Produto-->
+        <clr-textarea-container>
+          <label for="descricao">Descrição do Produto</label>
+          <textarea clrTextarea id="descricao" placeholder="Entre com a descrição aqui..." formControlName="descricao"></textarea>
+        </clr-textarea-container>
+        <!--Input FormArray dos Recursos-->
+        <label class="ctr-control-label">Recursos</label>
+        <clr-input-container formArrayName="recursos" *ngFor="let controle of basicoRecursos.controls">
+          <input type="text" clrInput [formControl]="controle" placeholder="IPhone X....">
+        </clr-input-container>
+        <button class="btn btn-primary" (click)="adicionarRecursos()">Adicionar Recursos</button>
+      </div>
+    </clr-wizard-page>
+    <clr-wizard-page>
+      <ng-template clrPageTitle>Informação de Validade</ng-template>
+      <clr-input-container formGroupName="expiracao">
+        <input type="date" clrInput clrDate formControlName="dataExpiracao">
+      </clr-input-container>
+    </clr-wizard-page>
+  </clr-wizard>
+</form>
