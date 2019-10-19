@@ -20,7 +20,7 @@ export class ProdutosComponent implements OnInit {
     return item.id;
   }
 
-  onDelete(produto) {
+  onDeletar(produto) {
     this.deletar = true;
     this.produtoParaSerDeletado = produto;
   }
