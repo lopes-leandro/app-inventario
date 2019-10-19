@@ -29,7 +29,7 @@ export class ProdutoService {
       impressão a partir de dispositivos móveis ou por conexão sem fio opcional, 
       impressão em frente e verso e rede, e imprime até 32 [30] páginas por minuto.`,
       dataExpiracao: '1/15/2020',
-      tipo: 'Impressora Laser a cores'
+      tipo: 'printer'
     },
     {
       id: gerandoId(),
@@ -37,7 +37,7 @@ export class ProdutoService {
       ativo: false,
       descricao: 'This is a 2 meter (6.5 feet) USB cable for use with a USB printer interface.',
       dataExpiracao: '1/15/2020',
-      tipo: 'Connectivity'
+      tipo: 'connectivity'
     },
     {
       id: gerandoId(),
@@ -49,7 +49,7 @@ export class ProdutoService {
       completos. Oferecendo uma velocidade de conexão de até 72 Mbps (1x1 SISO 802.11b/g/n) e com
       autenticação 802.1x e IPSec, o MarkNet N8352 pode até operar em um ambiente seguro.`,
       dataExpiracao: '1/15/2020',
-      tipo: 'Connectivity'
+      tipo: 'connectivity'
     },
     {
       id: gerandoId(),
@@ -60,7 +60,7 @@ export class ProdutoService {
       TCP/IP (IPv4 e IPV6) e é compatível com os sistemas operativos mais conhecidos incluindo Novell NetWare,
       Microsoft Windows (98, Me, NT, 2000, 2003 e XP), bem como UNIX, Linux e Apple Mac OS.`,
       dataExpiracao: '1/15/2020',
-      tipo: 'Connectivity'
+      tipo: 'connectivity'
     },
     {
       id: gerandoId(),
@@ -69,7 +69,7 @@ export class ProdutoService {
       descricao: `Com impressão colorida de até 22 páginas por minuto*, tamanho compacto e Wi-Fi padrão, a C3224dw da
       Lexmark pode oferecer suporte a grupos de trabalho pequenos.`,
       dataExpiracao: '1/15/2020',
-      tipo: 'Impressora Laser a cores'
+      tipo: 'printer'
     },
     {
       id: gerandoId(),
@@ -79,7 +79,7 @@ export class ProdutoService {
       digitalização automática, cópia e fax, tudo em um pacote compacto equipado com uma tela sensível ao
       toque.`,
       dataExpiracao: '1/15/2020',
-      tipo: 'Impressora Laser a cores'
+      tipo: 'printer'
     },
     {
       id: gerandoId(),
@@ -88,7 +88,7 @@ export class ProdutoService {
       descricao: `A Lexmark MC2535adwe multifuncional imprime até 35 [33] páginas por minuto* coloridas com uma tela de 
       toque colorida de 4,3 pol. [10,9 cm].`,
       dataExpiracao: '1/15/2020',
-      tipo: 'Impressora Laser a cores'
+      tipo: 'printer'
     },
     {
       id: gerandoId(),
@@ -97,7 +97,7 @@ export class ProdutoService {
       descricao: `A MFP colorida CX417de da Lexmark oferece confiança, segurança, impressão a partir de dispositivos
       móveis ou por conexão sem fio opcional, impressão frente e verso e rede, e imprime até 32 [30] páginas por minuto.`,
       dataExpiracao: '1/15/2020',
-      tipo: 'Impressora Laser a cores'
+      tipo: 'printer'
     },
     {
       id: gerandoId(),
@@ -105,7 +105,7 @@ export class ProdutoService {
       ativo: true,
       descricao: `Escolha os Suprimentos originais Lexmark para obter Resultados genuínos da Lexmark.`,
       dataExpiracao: '1/15/2020',
-      tipo: 'Supply'
+      tipo: 'supply'
     },
     {
       id: gerandoId(),
@@ -113,7 +113,7 @@ export class ProdutoService {
       ativo: true,
       descricao: `Escolha os Suprimentos originais Lexmark para obter Resultados genuínos da Lexmark.`,
       dataExpiracao: '1/15/2020',
-      tipo: 'Supply'
+      tipo: 'supply'
     },
     {
       id: gerandoId(),
@@ -124,7 +124,7 @@ export class ProdutoService {
        Inovador sistema de impressão que não precisa ser agitado.
        Ganhe suprimentos gratuitos com o Lexmark Rewards.`,
       dataExpiracao: '1/15/2020',
-      tipo: 'Supply'
+      tipo: 'supply'
     },
     {
       id: gerandoId(),
@@ -135,7 +135,7 @@ export class ProdutoService {
        Inovador sistema de impressão que não precisa ser agitado.
        Ganhe suprimentos gratuitos com o Lexmark Rewards.`,
       dataExpiracao: '1/15/2020',
-      tipo: 'Supply'
+      tipo: 'supply'
     },
     {
       id: gerandoId(),
@@ -146,7 +146,7 @@ export class ProdutoService {
        Inovador sistema de impressão que não precisa ser agitado.
        Ganhe suprimentos gratuitos com o Lexmark Rewards.`,
       dataExpiracao: '1/15/2020',
-      tipo: 'Supply'
+      tipo: 'supply'
     },
     {
       id: gerandoId(),
@@ -157,7 +157,7 @@ export class ProdutoService {
        Inovador sistema de impressão que não precisa ser agitado.
        Ganhe suprimentos gratuitos com o Lexmark Rewards.`,
       dataExpiracao: '1/15/2020',
-      tipo: 'Supply'
+      tipo: 'supply'
     }
   ];
 
@@ -168,6 +168,30 @@ export class ProdutoService {
     const index = this.produtos.indexOf(produto);
     this.produtos = [
       ...this.produtos.slice(0, index),
+      ...this.produtos.slice(index + 1),
+    ];
+    this.produto$.next(this.produtos);
+  }
+
+  adicionarProduto(produto) {
+    this.produtos = [
+      {
+        id: gerandoId(),
+        ...produto
+      },
+      ...this.produtos,
+    ];
+    this.produto$.next(this.produtos);
+  }
+
+  editarProduto(id, produto) {
+    const index = this.produtos.findIndex(p => p.id === id);
+    this.produtos = [
+      ...this.produtos.slice(0, index),
+      {
+        id,
+        ...produto,
+      },
       ...this.produtos.slice(index + 1),
     ];
     this.produto$.next(this.produtos);
