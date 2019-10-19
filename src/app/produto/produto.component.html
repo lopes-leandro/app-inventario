@@ -23,11 +23,23 @@
     </clr-wizard-page>
     <clr-wizard-page>
       <ng-template clrPageTitle>Informações Básicas</ng-template>
+      <ng-template clrPageButtons>
+        <clr-wizard-button [type]="'cancel'">Cancelar</clr-wizard-button>
+        <clr-wizard-button [type]="'previous'">Voltar</clr-wizard-button>
+        <clr-wizard-button [clrWizardButtonDisabled]="isBasicInvalid" [type]="'next'">Próximo</clr-wizard-button>
+      </ng-template>
+
       <div formGroupName="basic">
         <!--Campo Input do Nome do Produto-->
         <clr-input-container>
           <label for="produto-nome">Nome do Produto *</label>
           <input type="text" clrInput id="produto-nome" placeholder="IPhone X..." formControlName="nome">
+          <!--componente clr-control-error do Clarity-->
+          <!-- <clr-control-error>Este campo é obrigatório!</clr-control-error> -->
+          <!--Alternativa ao componente clr-control-error-->
+          <div *ngIf="produtoForm.get('basic.nome').invalid && produtoForm.get('basic.nome').dirty">
+            Este campo é obrigatório!
+          </div>
         </clr-input-container>
         <!--Toggle Switch do ativo-->
         <div class="toggle-switch">
@@ -37,7 +49,8 @@
         <!--TextArea para Descrição do Produto-->
         <clr-textarea-container>
           <label for="descricao">Descrição do Produto</label>
-          <textarea clrTextarea id="descricao" placeholder="Entre com a descrição aqui..." formControlName="descricao"></textarea>
+          <textarea clrTextarea id="descricao" placeholder="Entre com a descrição aqui..."
+            formControlName="descricao"></textarea>
         </clr-textarea-container>
         <!--Input FormArray dos Recursos-->
         <label class="ctr-control-label">Recursos</label>
@@ -49,8 +62,14 @@
     </clr-wizard-page>
     <clr-wizard-page>
       <ng-template clrPageTitle>Informação de Validade</ng-template>
+      <ng-template clrPageButtons>
+        <clr-wizard-button [clrWizardButtonDisabled]="isExpirationInvalid" (click)="handleFinish()" [type]="'finish'">
+          Finalizar</clr-wizard-button>
+      </ng-template>
+
       <clr-input-container formGroupName="expiracao">
         <input type="date" clrInput clrDate formControlName="dataExpiracao">
+        <clr-control-error>{{expirationError}}</clr-control-error>
       </clr-input-container>
     </clr-wizard-page>
   </clr-wizard>
