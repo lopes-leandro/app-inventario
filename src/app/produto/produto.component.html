@@ -10,7 +10,7 @@
       <div class="clr-row devices">
         <div class="clr-col-md-6" *ngFor="let item of dispositivoTipos">
           <a href="javascript:void(0)" class="card clickable" (click)="selecionarDispositivo(item)"
-            [ngClass]="{'active': item.icon === dispositivoTipo}">
+            [ngClass]="{'active': item.type === dispositivoTipo}">
             <div class="card-block">
               <p class="card-text">
                 {{item.nome}}

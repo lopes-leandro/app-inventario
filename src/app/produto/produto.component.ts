@@ -1,6 +1,7 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter, ViewChild, OnChanges } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { ClrWizard } from '@clr/angular';
+import * as _ from 'lodash';
 
 function minDateValidation(date: Date): ValidatorFn {
   return (control: AbstractControl): { [key: string]: any } | null => {
@@ -16,32 +17,39 @@ function minDateValidation(date: Date): ValidatorFn {
   styleUrls: ['./produto.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProdutoComponent implements OnInit {
+export class ProdutoComponent implements OnInit, OnChanges {
 
   @Output() finalizar = new EventEmitter();
   @ViewChild('produtoWizard', { read: false }) produtoWizard: ClrWizard;
   dispositivoTipo = 'printer';
   dispositivoTipos = [{
     nome: 'Suprimento',
-    icon: 'blocks-group'
+    icon: 'blocks-group',
+    type: 'supply'
   }, {
     nome: 'Impressora',
-    icon: 'printer'
+    icon: 'printer',
+    type: 'printer'
   }, {
     nome: 'Conectividade',
-    icon: 'connect'
+    icon: 'connect',
+    type: 'connectivity'
   }, {
     nome: 'Tablet',
-    icon: 'tablet'
+    icon: 'tablet',
+    type: 'tablet'
   }, {
     nome: 'Notebook',
-    icon: 'computer'
+    icon: 'computer',
+    type: 'computer'
   }, {
     nome: 'Celular',
-    icon: 'mobile'
+    icon: 'mobile',
+    type: 'mobile'
   }, {
     nome: 'Monitor',
-    icon: 'display'
+    icon: 'display',
+    type: 'display'
   }];
 
   produtoForm: FormGroup;
@@ -65,7 +73,24 @@ export class ProdutoComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    console.log(this.produto);
+    if (this.produto) {
+      this.produtoForm.setValue({
+        basic: {
+          ..._.pick(this.produto, ['nome', 'descricao', 'ativo']),
+          recursos: this.produto.recursos || [''],
+        },
+        expiracao: {
+          ..._.pick(this.produto, ['dataExpiracao']),
+        }
+      });
+      this.dispositivoTipo = this.produto.tipo;
+    }
+  }
+
+  ngOnChanges(): void {
+    this.ngOnInit();
   }
 
   selecionarDispositivo(dispositivo) {
