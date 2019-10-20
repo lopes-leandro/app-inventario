@@ -25,7 +25,7 @@ export class ProdutoService {
       id: gerandoId(),
       nome: 'Lexmark CS417dn',
       ativo: true,
-      descricao: `A impressora colorida CS417dn da Lexmark oferece confiança, segurança, 
+      descricao: `A printer colorida CS417dn da Lexmark oferece confiança, segurança, 
       impressão a partir de dispositivos móveis ou por conexão sem fio opcional, 
       impressão em frente e verso e rede, e imprime até 32 [30] páginas por minuto.`,
       dataExpiracao: '1/15/2020',
